@@ -17,8 +17,9 @@ class MainViewModel(private val retrofit : ImageInterface) : ViewModel() {
     val searchRandomImages : LiveData<List<RandomItems>> get() = _searchRandomImages
     private var _searchImages : MutableLiveData<List<MyItems>> = MutableLiveData(mutableListOf())
     val searchImages : LiveData<List<MyItems>> get() = _searchImages
-    private var _myItems : MutableLiveData<List<MyItems>> = MutableLiveData(mutableListOf())
-    val myItems : LiveData<List<MyItems>> get() = _myItems
+    private var _myItmes : MutableLiveData<MutableList<MyItems>> = MutableLiveData(mutableListOf())
+    val myItmes : LiveData<MutableList<MyItems>>
+        get() = _myItmes
 
     fun randomSearch() {
         var randomItems : MutableList<RandomItems> = mutableListOf()
@@ -49,10 +50,10 @@ class MainViewModel(private val retrofit : ImageInterface) : ViewModel() {
     }
 
     fun likeToggle(item : MyItems) {
-        if (_myItems.value?.contains(item) == true) {
-
+        if (_myItmes.value?.contains(item) == true) {
+            _myItmes.value?.remove(item)
         }else {
-
+            _myItmes.value?.add(item)
         }
     }
 }

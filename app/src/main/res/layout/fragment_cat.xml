@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/lay_cat"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_mybox"
+        android:id="@+id/recyclerview_cat"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/view_cat_gradiant"
