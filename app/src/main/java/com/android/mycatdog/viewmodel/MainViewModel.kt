@@ -47,6 +47,7 @@ class MainViewModel(private val retrofit : ImageInterface) : ViewModel() {
                 searchItems.add(searchImg)
             }
         }
+        _searchImages.value = searchItems
     }
 
     fun likeToggle(item : MyItems) {

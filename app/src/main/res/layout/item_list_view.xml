@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/cat_banner"
         android:scaleType="centerCrop"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="@id/tv_description"
         app:layout_constraintEnd_toEndOf="@id/tv_description"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +25,20 @@
         android:maxLines="1"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_breed_id"
         app:layout_constraintTop_toBottomOf="@id/iv_thumbnails"
-        android:text="품종, 설명" />
+        android:text="설명" />
+
+    <TextView
+        android:id="@+id/tv_breed_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/head_2"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_thumbnails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_description"
+        android:text="품종"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
