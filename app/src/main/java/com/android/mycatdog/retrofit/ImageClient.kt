@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object ImageClient {
     private fun createOkHttpClient() : OkHttpClient {
@@ -17,11 +18,13 @@ object ImageClient {
             .addNetworkInterceptor(interceptor)
             .build()
     }
-    var gson = GsonBuilder().setLenient().create()
+    private var gson = GsonBuilder().setLenient().create()
 
     private val imgRetrofit = Retrofit.Builder()
-        .baseUrl(Constants.BASE_URL).addConverterFactory(GsonConverterFactory.create(gson)).client(
-            createOkHttpClient()).build()
+        .baseUrl(Constants.BASE_URL)
+        .addConverterFactory(ScalarsConverterFactory.create()) //배열로 받는걸 string으로
+        .addConverterFactory(GsonConverterFactory.create(gson))
+        .client(createOkHttpClient()).build()
 
     val imgNetWork : ImageInterface = imgRetrofit.create(ImageInterface::class.java)
 }

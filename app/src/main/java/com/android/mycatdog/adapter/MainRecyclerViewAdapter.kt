@@ -27,13 +27,15 @@ class MainRecyclerViewAdapter(val context: Context) : ListAdapter<RecyclerItem,V
     private val BOTTOM_TYPE = 1
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val topItem = ItemViewpager2Binding.inflate(inflater,parent,false)
-        val bottomItem = ItemRecyclerViewBinding.inflate(inflater,parent,false)
 
         return when(viewType) {
-            TOP_TYPE -> TopViewHolder(topItem)
-            BOTTOM_TYPE -> BottomViewHolder(bottomItem)
-            else -> throw IllegalArgumentException("unvailed view type")
+            TOP_TYPE ->{
+                val topItem = ItemViewpager2Binding.inflate(inflater,parent,false)
+                TopViewHolder(topItem)}
+            else -> {
+                val bottomItem = ItemRecyclerViewBinding.inflate(inflater,parent,false)
+                BottomViewHolder(bottomItem)
+            }
         }
     }
 
@@ -57,7 +59,6 @@ class MainRecyclerViewAdapter(val context: Context) : ListAdapter<RecyclerItem,V
         return when(getItem(position)) {
             is RecyclerItem.TopViewPager -> TOP_TYPE
             is RecyclerItem.BreedAdapter -> BOTTOM_TYPE
-            else -> throw IllegalArgumentException("unvailed view type")
         }
 
     }
@@ -68,5 +69,4 @@ class MainRecyclerViewAdapter(val context: Context) : ListAdapter<RecyclerItem,V
     class BottomViewHolder(binding: ItemRecyclerViewBinding) : ViewHolder(binding.root) {
         val rvBottom = binding.rvBottomView
     }
-
 }

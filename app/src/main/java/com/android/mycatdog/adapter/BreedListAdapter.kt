@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.android.mycatdog.data.MyItems
-import com.android.mycatdog.databinding.ItemRecyclerListBinding
+import com.android.mycatdog.databinding.ItemListViewBinding
 import com.bumptech.glide.Glide
 
 class BreedListAdapter : ListAdapter<MyItems,BreedListAdapter.BreedItemViewHolder>(BreedDiffUtil) {
@@ -20,7 +20,7 @@ class BreedListAdapter : ListAdapter<MyItems,BreedListAdapter.BreedItemViewHolde
         }
     }
 
-    inner class BreedItemViewHolder(binding: ItemRecyclerListBinding) : ViewHolder(binding.root) {
+    inner class BreedItemViewHolder(binding: ItemListViewBinding) : ViewHolder(binding.root) {
         val img = binding.ivThumbnails
         val breed = binding.tvBreedId
         val description = binding.tvDescription
@@ -28,15 +28,17 @@ class BreedListAdapter : ListAdapter<MyItems,BreedListAdapter.BreedItemViewHolde
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BreedItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemRecyclerListBinding.inflate(inflater,parent,false)
+        val binding = ItemListViewBinding.inflate(inflater,parent,false)
         return BreedItemViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BreedItemViewHolder, position: Int) {
+        val item = getItem(position)
+
         Glide.with(holder.itemView.context)
-            .load(currentList[position].url)
+            .load(item.url)
             .into(holder.img)
-        holder.breed.text = currentList[position].breedName
-        holder.description.text = currentList[position].description
+        holder.breed.text = item. breedName
+        holder.description.text = item.description
     }
 }

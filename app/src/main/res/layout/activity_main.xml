@@ -16,10 +16,12 @@
 
     <View
         android:id="@+id/view_gradiant"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="20dp"
         android:background="@drawable/bg_gradiant_shadow_down_to_up2"
         android:elevation="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tablayout"/>
 
     <com.google.android.material.tabs.TabLayout
