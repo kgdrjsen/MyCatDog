@@ -1,27 +1,21 @@
 package com.android.mycatdog.view
 
-import android.animation.Animator
-import android.animation.TimeInterpolator
-import android.animation.ValueAnimator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.android.mycatdog.R
 import com.android.mycatdog.adapter.BreedListAdapter
 import com.android.mycatdog.adapter.MainRecyclerViewAdapter
 import com.android.mycatdog.adapter.TopViewPager2Adapter
-import com.android.mycatdog.data.RecyclerItem
+import com.android.mycatdog.apidata.RecyclerItem
 import com.android.mycatdog.databinding.FragmentCatBinding
 import com.android.mycatdog.retrofit.ImageClient
 import com.android.mycatdog.viewmodel.MainViewModel
 import com.android.mycatdog.viewmodel.ViewModelFactory
-import kotlinx.coroutines.Job
 
 class  CatFragment : Fragment() {
     private var _binding: FragmentCatBinding? = null
@@ -35,8 +29,8 @@ class  CatFragment : Fragment() {
     private val mainViewModel : MainViewModel by activityViewModels { ViewModelFactory(retrofit) }
 
     private var catFragItems : MutableList<RecyclerItem> = mutableListOf(
-        RecyclerItem.TopViewPager(TopViewPager2Adapter()),
-        RecyclerItem.BreedAdapter(BreedListAdapter())
+        RecyclerItem.TopViewPager(topAdapter),
+        RecyclerItem.BreedAdapter(breedAdapter)
     )
 
     override fun onCreateView(
@@ -54,6 +48,7 @@ class  CatFragment : Fragment() {
 
     private fun setup() {
         initViews()
+        setObserve()
     }
 
     private fun initViews() {
@@ -67,5 +62,14 @@ class  CatFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
         mainAdapter.submitList(catFragItems)
+    }
+
+    private fun setObserve() {
+        mainViewModel.searchRandomImages.observe(viewLifecycleOwner){
+            topAdapter.submitList(mainViewModel.searchRandomImages.value)
+            Log.d("CatFragment","#aaa Random size = ${mainViewModel.searchRandomImages.value?.size}")
+            val topItem = RecyclerItem.TopViewPager(topAdapter)
+            mainAdapter.submitList(catFragItems)
+        }
     }
 }

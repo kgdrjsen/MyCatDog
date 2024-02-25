@@ -1,12 +1,11 @@
 package com.android.mycatdog.retrofit
 
-import com.android.mycatdog.data.Constants
+import com.android.mycatdog.apidata.Constants
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object ImageClient {
     private fun createOkHttpClient() : OkHttpClient {
@@ -22,7 +21,6 @@ object ImageClient {
 
     private val imgRetrofit = Retrofit.Builder()
         .baseUrl(Constants.BASE_URL)
-        .addConverterFactory(ScalarsConverterFactory.create()) //배열로 받는걸 string으로
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(createOkHttpClient()).build()
 

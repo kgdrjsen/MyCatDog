@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.mycatdog.data.Constants
-import com.android.mycatdog.data.MyItems
-import com.android.mycatdog.data.RandomItems
+import com.android.mycatdog.apidata.BreedsItem
+import com.android.mycatdog.apidata.Constants
+import com.android.mycatdog.apidata.MyItems
+import com.android.mycatdog.apidata.RandomItems
 import com.android.mycatdog.retrofit.ImageClient
 import com.android.mycatdog.retrofit.ImageInterface
 import kotlinx.coroutines.launch
@@ -29,17 +30,15 @@ class MainViewModel(private val retrofit: ImageInterface) : ViewModel() {
         viewModelScope.launch {
             randomItems.clear()
             val responseImg = imgNetwork.imageRandomSearch()
-            val randomImg = responseImg.item
-            randomImg.forEach {
-                val resultImg = it.id?.let { it1 -> it.url?.let { it2 -> RandomItems(it1, it2) } }
-                if (resultImg != null) {
-                    Log.d("MainViewModel","#aaa resultImg = $resultImg")
-                    randomItems.add(resultImg)
-                }
+            responseImg.forEach {
+                val resultImg = RandomItems(it.id, it.url)
+                Log.d("MainViewModel", "#aaa resultImg = $resultImg")
+                randomItems.add(resultImg)
             }
+            Log.d("MainViewModel","#aaa resultImg size = ${randomItems.size}")
+            _searchRandomImages.value = randomItems
+            Log.d("MainViewModel", "#aaa randomItem size = ${_searchRandomImages.value?.size}")
         }
-        _searchRandomImages.value = randomItems
-        Log.d("MainViewModel","#aaa randomItem size = ${_searchRandomImages.value?.size}")
     }
 
     fun doSearch(breeds: String) {
@@ -49,12 +48,15 @@ class MainViewModel(private val retrofit: ImageInterface) : ViewModel() {
         viewModelScope.launch {
             searchItems.clear()
             val responseImg = imgNetwork.imageBreedsSearch(Constants.API_KEY, 10, breeds)
-            responseImg.breeds.forEach {
-                val resultImg = MyItems(responseImg.id,responseImg.url,it.id,it.name,it.origin,it.description,it.temperament)
+            responseImg.forEach{
+                val breedItem = it.breeds as BreedsItem
+                val resultImg = MyItems(it.id,it.url,breedItem.id,breedItem.name,
+                    breedItem.origin,breedItem.description,breedItem.temperament)
+
                 searchItems.add(resultImg)
             }
+            _searchImages.value = searchItems
         }
-        _searchImages.value = searchItems
     }
 
     fun likeToggle(item: MyItems) {

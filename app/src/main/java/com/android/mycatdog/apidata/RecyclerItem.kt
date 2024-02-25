@@ -1,4 +1,4 @@
-package com.android.mycatdog.data
+package com.android.mycatdog.apidata
 
 import com.android.mycatdog.adapter.BreedListAdapter
 import com.android.mycatdog.adapter.TopViewPager2Adapter

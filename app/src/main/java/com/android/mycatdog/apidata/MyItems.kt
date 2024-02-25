@@ -1,4 +1,4 @@
-package com.android.mycatdog.data
+package com.android.mycatdog.apidata
 
 data class MyItems(
     val urlId : String?,

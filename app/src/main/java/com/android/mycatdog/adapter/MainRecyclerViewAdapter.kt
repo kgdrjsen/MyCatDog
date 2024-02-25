@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.android.mycatdog.data.RecyclerItem
+import com.android.mycatdog.apidata.RecyclerItem
 import com.android.mycatdog.databinding.ItemRecyclerViewBinding
 import com.android.mycatdog.databinding.ItemViewpager2Binding
 

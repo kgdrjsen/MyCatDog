@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.android.mycatdog.data.MyItems
+import com.android.mycatdog.apidata.MyItems
 import com.android.mycatdog.databinding.ItemListViewBinding
 import com.bumptech.glide.Glide
 

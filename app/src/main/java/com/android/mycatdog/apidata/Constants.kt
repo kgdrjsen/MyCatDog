@@ -1,4 +1,4 @@
-package com.android.mycatdog.data
+package com.android.mycatdog.apidata
 
 object Constants {
     val BASE_URL = "https://api.thecatapi.com/v1/"
