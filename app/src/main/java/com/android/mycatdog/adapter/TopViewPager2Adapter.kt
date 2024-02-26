@@ -10,6 +10,7 @@ import com.android.mycatdog.databinding.ItemHorizonViewBinding
 import com.bumptech.glide.Glide
 
 class TopViewPager2Adapter : ListAdapter<RandomItems, TopViewPager2Adapter.TopViewHolder> (RandomDiffUtil) {
+
     object RandomDiffUtil : DiffUtil.ItemCallback<RandomItems>() {
         override fun areItemsTheSame(oldItem: RandomItems, newItem: RandomItems): Boolean {
             return oldItem.urlId == newItem.urlId

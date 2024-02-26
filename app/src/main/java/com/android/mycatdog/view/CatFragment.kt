@@ -68,7 +68,6 @@ class  CatFragment : Fragment() {
         mainViewModel.searchRandomImages.observe(viewLifecycleOwner){
             topAdapter.submitList(mainViewModel.searchRandomImages.value)
             Log.d("CatFragment","#aaa Random size = ${mainViewModel.searchRandomImages.value?.size}")
-            val topItem = RecyclerItem.TopViewPager(topAdapter)
             mainAdapter.submitList(catFragItems)
         }
     }

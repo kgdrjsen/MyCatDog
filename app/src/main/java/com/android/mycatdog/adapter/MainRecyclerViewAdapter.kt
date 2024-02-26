@@ -64,6 +64,28 @@ class MainRecyclerViewAdapter(val context: Context) : ListAdapter<RecyclerItem,V
     }
     class TopViewHolder(binding: ItemViewpager2Binding) : ViewHolder(binding.root) {
         val pager = binding.viewPager2
+        val left = binding.back
+        val right = binding.front
+
+        init {
+            left.setOnClickListener {
+                val current = pager.currentItem
+                if (current == 0) {
+                    pager.setCurrentItem(9,false)
+                } else {
+                    pager.setCurrentItem(current-1,false)
+                }
+            }
+
+            right.setOnClickListener {
+                val current = pager.currentItem
+                if (current == 9) {
+                    pager.setCurrentItem(0,false)
+                }else {
+                    pager.setCurrentItem(current+1,false)
+                }
+            }
+        }
     }
 
     class BottomViewHolder(binding: ItemRecyclerViewBinding) : ViewHolder(binding.root) {
